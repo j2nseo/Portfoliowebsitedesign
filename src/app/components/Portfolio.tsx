@@ -372,50 +372,42 @@ export function Portfolio() {
               {[
                 {
                   category: 'INTERNSHIP · RESEARCH',
-                  title: 'AI-Based Hourly Accident Prediction in NYC Using Weather Data',
+                  title: ['AI-Based Hourly Accident Prediction in NYC Using Weather Data'],
                   organization: 'Qualcomm Institute, UC San Diego',
-                  period: '2024.07 - 08',
+                  period: '2024.07 - 2024.08',
                   description: 'NYC 교통사고 + 기상 데이터를 결합한 7단계 정기 시계열 데이터셋 구축. XGBoost vs Random Forest 성능 비교 분석, 최적 예측 모델 도출. (R²=0.782)',
                   tags: ['Python', 'XGBoost', 'RandomForest', 'Preprocessing'],
                 },
                 {
-                  category: 'RESEARCH · 논문 게재',
-                  title: '개인형 이동장치(PM) 사고 발생 요인 및 연관성 분석',
-                  organization: '경기대학교 데이터 분석 연구실',
-                  period: '2025.03 - 09',
-                  description: '경찰청 PM 사고 데이터 5,919건 수집 및 정제타. CCA + 네트워크 분석으로 사고 패턴 규명, 고위험 사나리오 도출, 시사정영연구 논문 게재.',
-                  tags: ['Python', 'R', 'CCA', 'Network Analysis'],
-                },
-                {
                   category: '🏆 우수상',
-                  title: '중장년 맞춤형 AI 교육 추천 에이전트 \'다시, 봄\'',
+                  title: ['중장년 맞춤형 AI 교육 추천 에이전트 \'다시, 봄\''],
                   organization: '연세대학교 미래 ICT 서울 지역사회 경험학습 공모전',
-                  period: '2025.11 - 12',
+                  period: '2025.11 - 2025.12',
                   description: 'Ko-SRoBERTa + FAISS 벡터 DB + LangChain RAG 구조로 직군 경력 기반 AI 교육 추천. LLM 적합성 검증 단계 추가로 추천 신뢰도 강화. 우수상 수상.',
                   tags: ['Python', 'LangChain', 'RAG', 'FAISS', '생성AI'],
                 },
                 {
-                  category: 'RESEARCH · 학회 발표',
-                  title: 'BERTopic 기반 속성 맞춤형 도슨트 AI 서비스',
-                  organization: '경기대학교 데이터 분석 연구실',
-                  period: '2025.09 - 11',
-                  description: '전시 리뷰 2,145건 수집 및 BERTopic 토픽 모델링으로 관람 속성 도출. RAG 기반 개인 맞춤형 도슨트 해설 생성, UX 하나투 모델 기반 UI 설계.',
-                  tags: ['Python', 'BERTopic', 'RAG', 'LangChain', 'Figma'],
+                  category: '기업 프로젝트',
+                  title: ['웹 소설 – 애니메이션 매체 전환(OSMU)의', '사용자 주요 흥미 포인트 도출'],
+                  organization: 'STELLA&',
+                  period: '2025.09 - 2025.12',
+                  description: '웹 소설과 애니메이션 매체 간 전환 시 사용자 흥미 포인트를 분석하여 OSMU 전략 수립. 데이터 기반 콘텐츠 기획 및 분석 수행.',
+                  tags: ['Python', 'Data Analysis', 'OSMU', 'Content'],
                 },
                 {
                   category: '공모전 발표',
-                  title: 'Plannie: GPT 기반 맞춤형 공부 일정 관리 앱',
+                  title: ['Plannie: GPT 기반 맞춤형 공부 일정 관리 앱'],
                   organization: '2024 경기 SW 페스타',
-                  period: '2024.04 - 11',
+                  period: '2024.04 - 2024.11',
                   description: 'GPT few-shot learning + 프롬프트 엔지니어링으로 학습자 역대에 최적화된 맞춤형 계획 생성 AI 봇 구축. 플러터-To-Do List 연동 학습 관리 서비스.',
                   tags: ['Python', 'OpenAI API', 'Few-shot', 'Prompt Eng.'],
                 },
                 {
                   category: '공모전 발표',
-                  title: '메타버스와 AI 추천 서비스 기반 키오스크 안내 서비스',
+                  title: ['메타버스와 AI 추천 서비스 기반', '키오스크 안내 서비스'],
                   organization: '2023 한이음 ICT 멘토링 공모전',
-                  period: '2023.04 - 11',
-                  description: '다자털 실버계 대상 키오스크 접근성 향상 서비스. 코사인 유사도 + KNN 딥러 콘텐츠 AI 추천, AR Core 기반 공간 안내 구현.',
+                  period: '2023.04 - 2023.11',
+                  description: '디지털 실버계층 대상 키오스크 접근성 향상 서비스. 코사인 유사도 + KNN 기반 콘텐츠 AI 추천, AR Core 기반 공간 안내 구현.',
                   tags: ['Python', 'ML', 'KNN', 'AR Core', 'Cosine Sim.'],
                 },
               ].map((project, index) => (
@@ -442,7 +434,18 @@ export function Portfolio() {
                     </div>
                     
                     <h4 className="text-base text-foreground font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
-                      {project.title}
+                      {Array.isArray(project.title) ? (
+                        <>
+                          {project.title.map((line, i) => (
+                            <span key={i}>
+                              {line}
+                              {i < project.title.length - 1 && <br />}
+                            </span>
+                          ))}
+                        </>
+                      ) : (
+                        project.title
+                      )}
                     </h4>
                     
                     <p className="text-xs text-muted-foreground mb-2">
@@ -541,6 +544,96 @@ export function Portfolio() {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Others */}
+            <div className="mt-16">
+              <div className="flex items-center gap-3 mb-6">
+                <h4 className="text-sm text-primary font-semibold tracking-wider">OTHERS</h4>
+                <div className="h-px bg-primary/30 flex-1"></div>
+              </div>
+
+              <div className="space-y-4">
+                <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h4 className="text-base text-foreground font-bold mb-1">연구실 연합 SNS 채널 운영</h4>
+                      <a 
+                        href="https://www.instagram.com/soda_yoonity" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm text-primary hover:underline"
+                      >
+                        @soda_yoonity (Instagram)
+                      </a>
+                    </div>
+                    <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                      콘텐츠
+                    </Badge>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                    최신 AI 연구 동향을 분석해 주간 카드뉴스 제작, 밈(Meme)을 활용한 릴스 콘텐츠 제작으로 
+                    연구실 계정 도달률 강화. 친근한 AI 용어를 인포그래픽으로 재구성해 지식 전달 효율성 제고.
+                  </p>
+
+                  <div className="flex gap-6 mt-4">
+                    <div>
+                      <p className="text-xl text-primary font-bold">26.8만</p>
+                      <p className="text-xs text-muted-foreground tracking-wider">TOTAL VIEWS</p>
+                    </div>
+                    <div>
+                      <p className="text-xl text-primary font-bold">54</p>
+                      <p className="text-xs text-muted-foreground tracking-wider">POSTS</p>
+                    </div>
+                    <div>
+                      <p className="text-xl text-primary font-bold">112</p>
+                      <p className="text-xs text-muted-foreground tracking-wider">FOLLOWERS</p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h4 className="text-base text-foreground font-bold mb-1">연구실 홈페이지 제작</h4>
+                      <a 
+                        href="https://sodalab-site.onrender.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm text-primary hover:underline inline-flex items-center gap-1"
+                      >
+                        sodalab-site.onrender.com
+                        <ExternalLink size={14} />
+                      </a>
+                    </div>
+                    <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                      웹 개발
+                    </Badge>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                    React + TypeScript 기반 반응형 웹사이트 구축. Figma를 활용한 UI/UX 디자인부터 프론트엔드 개발, 
+                    Vercel 배포까지 전 과정 담당. 연구실 소개, 프로젝트, 팀원, 논문 정보를 직관적으로 전달하는 
+                    사용자 중심 인터페이스 설계.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                      React
+                    </Badge>
+                    <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                      TypeScript
+                    </Badge>
+                    <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                      Figma
+                    </Badge>
+                    <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                      Vercel
+                    </Badge>
+                  </div>
+                </Card>
               </div>
             </div>
           </motion.section>
