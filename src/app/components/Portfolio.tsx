@@ -32,6 +32,7 @@ export function Portfolio() {
   const experienceRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const researchRef = useRef<HTMLDivElement>(null);
+  const othersRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -107,6 +108,7 @@ export function Portfolio() {
     { name: 'EXPERIENCE', ref: experienceRef },
     { name: 'PROJECTS', ref: projectsRef },
     { name: 'RESEARCH', ref: researchRef },
+    { name: 'OTHERS', ref: othersRef },
     { name: 'SKILLS', ref: skillsRef },
     { name: 'CONTACT', ref: contactRef },
   ];
@@ -133,7 +135,7 @@ export function Portfolio() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    const sections = [aboutRef, educationRef, experienceRef, projectsRef, researchRef, skillsRef, contactRef];
+    const sections = [aboutRef, educationRef, experienceRef, projectsRef, researchRef, othersRef, skillsRef, contactRef];
     sections.forEach((ref) => {
       if (ref.current) {
         observer.observe(ref.current);
@@ -634,7 +636,141 @@ export function Portfolio() {
                     </Badge>
                   </div>
                 </Card>
+
+                <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h4 className="text-base text-foreground font-bold mb-1">2023 코드클럽 SW 교육 기부단</h4>
+                      <p className="text-xs text-primary font-semibold">
+                        2023.04 - 2023.07
+                      </p>
+                    </div>
+                    <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                      봉사활동
+                    </Badge>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    초등학교 코딩 교육 봉사활동. 학생들에게 기초 프로그래밍 개념을 쉽고 재미있게 가르치며 SW 교육의 중요성을 전파.
+                  </p>
+                </Card>
               </div>
+            </div>
+          </motion.section>
+
+          {/* Others Section */}
+          <motion.section 
+            ref={othersRef}
+            data-section="OTHERS"
+            className="space-y-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-8 bg-primary rounded-full"></div>
+              <h3 className="text-2xl text-primary font-semibold">Others</h3>
+            </div>
+
+            <div className="space-y-4">
+              <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h4 className="text-base text-foreground font-bold mb-1">연구실 연합 SNS 채널 운영</h4>
+                    <a 
+                      href="https://www.instagram.com/soda_yoonity" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      @soda_yoonity (Instagram)
+                    </a>
+                  </div>
+                  <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                    콘텐츠
+                  </Badge>
+                </div>
+                
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  최신 AI 연구 동향을 분석해 주간 카드뉴스 제작, 밈(Meme)을 활용한 릴스 콘텐츠 제작으로 
+                  연구실 계정 도달률 강화. 친근한 AI 용어를 인포그래픽으로 재구성해 지식 전달 효율성 제고.
+                </p>
+
+                <div className="flex gap-6 mt-4">
+                  <div>
+                    <p className="text-xl text-primary font-bold">26.8만</p>
+                    <p className="text-xs text-muted-foreground tracking-wider">TOTAL VIEWS</p>
+                  </div>
+                  <div>
+                    <p className="text-xl text-primary font-bold">54</p>
+                    <p className="text-xs text-muted-foreground tracking-wider">POSTS</p>
+                  </div>
+                  <div>
+                    <p className="text-xl text-primary font-bold">112</p>
+                    <p className="text-xs text-muted-foreground tracking-wider">FOLLOWERS</p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h4 className="text-base text-foreground font-bold mb-1">연구실 홈페이지 제작</h4>
+                    <a 
+                      href="https://sodalab-site.onrender.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline inline-flex items-center gap-1"
+                    >
+                      sodalab-site.onrender.com
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
+                  <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                    웹 개발
+                  </Badge>
+                </div>
+                
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  React + TypeScript 기반 반응형 웹사이트 구축. Figma를 활용한 UI/UX 디자인부터 프론트엔드 개발, 
+                  Vercel 배포까지 전 과정 담당. 연구실 소개, 프로젝트, 팀원, 논문 정보를 직관적으로 전달하는 
+                  사용자 중심 인터페이스 설계.
+                </p>
+
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    React
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    TypeScript
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Figma
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Vercel
+                  </Badge>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h4 className="text-base text-foreground font-bold mb-1">2023 코드클럽 SW 교육 기부단</h4>
+                    <p className="text-xs text-primary font-semibold">
+                      2023.04 - 2023.07
+                    </p>
+                  </div>
+                  <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                    봉사활동
+                  </Badge>
+                </div>
+                
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  초등학교 코딩 교육 봉사활동. 학생들에게 기초 프로그래밍 개념을 쉽고 재미있게 가르치며 SW 교육의 중요성을 전파.
+                </p>
+              </Card>
             </div>
           </motion.section>
 
