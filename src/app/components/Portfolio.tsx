@@ -44,6 +44,9 @@ export function Portfolio() {
   const fullText = 'Jinseo Park';
   const fullSubtext = 'Data Analyst';
 
+  // 프로젝트 카드 뒤집기 상태
+  const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
+
   useEffect(() => {
     let i = 0;
     const typingInterval = setInterval(() => {
@@ -239,7 +242,7 @@ export function Portfolio() {
               </p>
               
               <p>
-                <span className="font-semibold">Qualcomm Institute, UC San Diego</span>에서 AI 기반 교통사고 예측 연구를 진행하며 실제 공공 데이터를 분석하고 머신러닝 모델을 적용하는 연구 경험을 쌓았습니다.
+                <span className="font-semibold">QI AI 개발 프로그램에 참여하여 Qualcomm Institute, UC San Diego</span>에서 AI 기반 교통사고 예측 연구를 진행하며 실제 공공 데이터를 분석하고 머신러닝 모델을 적용하는 연구 경험을 쌓았습니다.
               </p>
               
               <p>
@@ -290,7 +293,7 @@ export function Portfolio() {
 
               <div>
                 <div className="flex items-baseline gap-3 mb-3">
-                  <span className="text-xs text-primary font-semibold">2018.03 — 2021.02</span>
+                  <span className="text-xs text-primary font-semibold">2018.03 — 2021.02 (졸업)</span>
                 </div>
                 <h4 className="text-lg text-foreground font-bold mb-2">화홍고등학교</h4>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
@@ -322,7 +325,7 @@ export function Portfolio() {
                 </div>
                 <h4 className="text-lg text-foreground mb-2">학부 연구원 · <span className="font-bold">경기대학교 산업시스템공학과 데이터 분석 연구실</span></h4>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  데이터 분석 기법을 활용하여 사회 문제를 해결하는 연구를 수행하고 있습니다.
+                  데이터 분석 기법을 활용하여 사회 문제를 해결하는 연구를 수행하고 있습니다.<br />
                   머신러닝 모델 개발 및 최적화, 데이터 전처리 및 시각화 작업에 참여하고 있습니다.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -342,8 +345,7 @@ export function Portfolio() {
                   2024 Summer AI Development Program (Advisor: Seokheon Cho, Ph.D.)
                 </p>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  AI 기반 교통사고 예측 연구를 진행했습니다. 
-                  실제 공공 데이터를 수집 및 분석하고, 머신러닝 모델을 설계 및 적용하여 교통사고 발생 패턴을 예측하는 시스템을 개발했습니다.
+                  Qualcomm Institute의 현지 연구원 지도 아래 실제 공공 데이터를 수집·분석하여 머신러닝 모델을 설계 및 적용한 AI 기반 교통사고 예측 프로젝트를 수행했습니다.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">Python</Badge>
@@ -373,27 +375,51 @@ export function Portfolio() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               {[
                 {
-                  category: 'INTERNSHIP · RESEARCH',
+                  category: 'RESEARCH',
                   title: ['AI-Based Hourly Accident Prediction in NYC Using Weather Data'],
                   organization: 'Qualcomm Institute, UC San Diego',
                   period: '2024.07 - 2024.08',
-                  description: 'NYC 교통사고 + 기상 데이터를 결합한 7단계 정기 시계열 데이터셋 구축. XGBoost vs Random Forest 성능 비교 분석, 최적 예측 모델 도출. (R²=0.782)',
+                  description: 'NYC 교통사고 + 기상 데이터를 결합한 7단계 정기 시계열 데이터셋 구축. XGBoost vs Random Forest 성능 비교 분석, 최적 예측 모델 도출.',
+                  detailedDescription: [
+                    '배경: 뉴욕시 교통사고 예측을 위한 기상 데이터 활용 연구',
+                    '데이터: NYC Motor Vehicle Collisions 데이터 + 기상청 날씨 데이터 (2018-2024)',
+                    '방법론: 7단계 정기 시계열 데이터 전처리 파이프라인 구축',
+                    '모델: XGBoost, Random Forest 앙상블 모델 학습 및 하이퍼파라미터 최적화',
+                    '결과: XGBoost 모델 R²=0.782로 최우수 성능 달성',
+                    '성과: 시간대별 사고 예측 정확도를 통한 교통 안전 정책 수립 기여'
+                  ],
                   tags: ['Python', 'XGBoost', 'RandomForest', 'Preprocessing'],
                 },
                 {
                   category: '🏆 우수상',
                   title: ['중장년 맞춤형 AI 교육 추천 에이전트 \'다시, 봄\''],
                   organization: '연세대학교 미래 ICT 서울 지역사회 경험학습 공모전',
-                  period: '2025.11 - 2025.12',
-                  description: 'Ko-SRoBERTa + FAISS 벡터 DB + LangChain RAG 구조로 직군 경력 기반 AI 교육 추천. LLM 적합성 검증 단계 추가로 추천 신뢰도 강화. 우수상 수상.',
+                  period: '2024.11 - 2024.12',
+                  description: 'Ko-SRoBERTa + FAISS 벡터 DB + LangChain RAG 구조로 직군 경력 기반 AI 교육 추천. LLM 적합성 검증 단계 추가로 추천 신뢰도 강화.',
+                  detailedDescription: [
+                    '배경: 중장년층을 위한 AI 기반 재교육 프로그램 추천 시스템 개발',
+                    '문제 정의: 디지털 전환기 중장년층의 재취업을 위한 맞춤형 교육 필요',
+                    '기술 스택: Ko-SRoBERTa 임베딩 + FAISS 벡터 DB + LangChain RAG',
+                    '핵심 기능: 사용자 직군/경력 기반 유사도 검색 → LLM 적합성 검증 → 맞춤 추천',
+                    '차별점: 이중 검증(벡터 유사도 + LLM) 방식으로 추천 신뢰도 향상',
+                    '성과: 연세대학교 미래 ICT 공모전 우수상 수상'
+                  ],
                   tags: ['Python', 'LangChain', 'RAG', 'FAISS', '생성AI'],
                 },
                 {
                   category: '기업 프로젝트',
                   title: ['웹 소설 – 애니메이션 매체 전환(OSMU)의', '사용자 주요 흥미 포인트 도출'],
                   organization: 'STELLA&',
-                  period: '2025.09 - 2025.12',
-                  description: '웹 소설과 애니메이션 매체 간 전환 시 사용자 흥미 포인트를 분석하여 OSMU 전략 수립. 데이터 기반 콘텐츠 기획 및 분석 수행.',
+                  period: '2024.09 - 2024.12',
+                  description: '웹 소설과 애니메이션 매체 간 전환 시 사용자 흥미 포인트를 분석하여 OSMU 전략 수립.',
+                  detailedDescription: [
+                    '배경: 웹 소설의 애니메이션 매체 전환(OSMU) 전략 수립을 위한 데이터 분석',
+                    '목표: 웹 소설 → 애니메이션 전환 시 사용자 흥미 요소 규명',
+                    '분석 대상: 네이버 웹소설/웹툰 리뷰 데이터, 애니메이션 시청 평가 데이터',
+                    '분석 방법: 텍스트 마이닝, 감성 분석, 토픽 모델링을 통한 핵심 흥미 요소 추출',
+                    '결과: 매체 전환 시 핵심 유지 요소(캐릭터 일관성, 스토리 구조) vs 변화 요소(시각 연출) 도출',
+                    '활용: 데이터 기반 OSMU 콘텐츠 기획 및 제작 전략 수립'
+                  ],
                   tags: ['Python', 'Data Analysis', 'OSMU', 'Content'],
                 },
                 {
@@ -401,7 +427,15 @@ export function Portfolio() {
                   title: ['Plannie: GPT 기반 맞춤형 공부 일정 관리 앱'],
                   organization: '2024 경기 SW 페스타',
                   period: '2024.04 - 2024.11',
-                  description: 'GPT few-shot learning + 프롬프트 엔지니어링으로 학습자 역대에 최적화된 맞춤형 계획 생성 AI 봇 구축. 플러터-To-Do List 연동 학습 관리 서비스.',
+                  description: 'GPT few-shot learning + 프롬프트 엔지니어링으로 학습자 역량에 최적화된 맞춤형 계획 생성 AI 봇 구축.',
+                  detailedDescription: [
+                    '배경: 학습자 개인별 역량과 목표에 맞춘 학습 계획 자동 생성 앱 개발',
+                    '핵심 기능: GPT-4 API + Few-shot Learning으로 학습자 맥락 기반 계획 생성',
+                    '프롬프트 엔지니어링: 학습 목표, 가용 시간, 난이도 선호 반영 프롬프트 최적화',
+                    'To-Do List 연동: Flutter 기반 모바일 앱과 GPT 봇 실시간 동기화',
+                    '사용자 피드백: 계획 준수율 추적 → 재학습으로 추천 정확도 향상',
+                    '발표: 2024 경기 SW 페스타 프로젝트 전시'
+                  ],
                   tags: ['Python', 'OpenAI API', 'Few-shot', 'Prompt Eng.'],
                 },
                 {
@@ -410,67 +444,129 @@ export function Portfolio() {
                   organization: '2023 한이음 ICT 멘토링 공모전',
                   period: '2023.04 - 2023.11',
                   description: '디지털 실버계층 대상 키오스크 접근성 향상 서비스. 코사인 유사도 + KNN 기반 콘텐츠 AI 추천, AR Core 기반 공간 안내 구현.',
+                  detailedDescription: [
+                    '배경: 디지털 소외계층을 위한 키오스크 사용 교육 플랫폼 개발',
+                    '문제 정의: 고령층의 키오스크 이용 어려움 → 메타버스 가상 훈련 환경 제공',
+                    'AI 추천 시스템: 코사인 유사도 + KNN 기반 사용자 맞춤 콘텐츠 추천',
+                    'AR 공간 안내: AR Core를 활용한 실제 매장 내 키오스크 위치 안내',
+                    '메타버스 환경: Unity 기반 가상 키오스크 체험 공간 구축',
+                    '성과: 2023 한이음 ICT 멘토링 공모전 발표'
+                  ],
                   tags: ['Python', 'ML', 'KNN', 'AR Core', 'Cosine Sim.'],
                 },
-              ].map((project, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ 
-                    scale: 1.02,
-                    y: -5,
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Card className="p-6 bg-card hover:bg-card/80 transition-all group hover:shadow-xl h-full flex flex-col">
-                    <div className="mb-4">
-                      <Badge 
-                        variant="outline" 
-                        className={`text-xs font-semibold ${
-                          project.category.includes('🏆') 
-                            ? 'border-yellow-500 text-yellow-600 bg-yellow-50' 
-                            : 'border-primary/30 text-primary bg-primary/5'
-                        }`}
+              ].map((project, index) => {
+                const isFlipped = flippedCards[index] || false;
+                
+                return (
+                  <motion.div
+                    key={index}
+                    className="relative h-[450px]"
+                    style={{ perspective: 1000 }}
+                  >
+                    <motion.div
+                      className="relative w-full h-full cursor-pointer"
+                      onClick={() => setFlippedCards(prev => ({ ...prev, [index]: !prev[index] }))}
+                      animate={{ rotateY: isFlipped ? 180 : 0 }}
+                      transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+                      style={{ transformStyle: "preserve-3d" }}
+                    >
+                      {/* 앞면 */}
+                      <div
+                        className="w-full h-full"
+                        style={{ 
+                          backfaceVisibility: "hidden",
+                          WebkitBackfaceVisibility: "hidden",
+                          position: isFlipped ? 'absolute' : 'relative',
+                          inset: isFlipped ? 0 : 'auto'
+                        }}
                       >
-                        {project.category}
-                      </Badge>
-                    </div>
-                    
-                    <h4 className="text-base text-foreground font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
-                      {Array.isArray(project.title) ? (
-                        <>
-                          {project.title.map((line, i) => (
-                            <span key={i}>
-                              {line}
-                              {i < project.title.length - 1 && <br />}
-                            </span>
-                          ))}
-                        </>
-                      ) : (
-                        project.title
-                      )}
-                    </h4>
-                    
-                    <p className="text-xs text-muted-foreground mb-2">
-                      {project.organization} · {project.period}
-                    </p>
-                    
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-grow">
-                      {project.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {project.tags.map((tag, tagIndex) => (
-                        <Badge 
-                          key={tagIndex} 
-                          className="bg-primary text-primary-foreground text-xs px-2 py-1 hover:bg-primary/90"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+                        <Card className="p-6 bg-card hover:bg-card/80 transition-all group hover:shadow-xl h-full flex flex-col">
+                          <div className="mb-4">
+                            <Badge 
+                              variant="outline" 
+                              className={`text-xs font-semibold ${
+                                project.category.includes('🏆') 
+                                  ? 'border-yellow-500 text-yellow-600 bg-yellow-50' 
+                                  : 'border-primary/30 text-primary bg-primary/5'
+                              }`}
+                            >
+                              {project.category}
+                            </Badge>
+                          </div>
+                          
+                          <h4 className="text-base text-foreground font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
+                            {Array.isArray(project.title) ? (
+                              <>
+                                {project.title.map((line, i) => (
+                                  <span key={i}>
+                                    {line}
+                                    {i < project.title.length - 1 && <br />}
+                                  </span>
+                                ))}
+                              </>
+                            ) : (
+                              project.title
+                            )}
+                          </h4>
+                          
+                          <p className="text-xs text-muted-foreground mb-2">
+                            {project.organization} · {project.period}
+                          </p>
+                          
+                          <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-grow">
+                            {project.description}
+                          </p>
+                          
+                          <div className="flex flex-wrap gap-2 mt-auto">
+                            {project.tags.map((tag, tagIndex) => (
+                              <Badge 
+                                key={tagIndex} 
+                                className="bg-primary text-primary-foreground text-xs px-2 py-1 hover:bg-primary/90"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+
+                          <p className="text-xs text-primary mt-4 text-center font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                            클릭하여 자세히 보기 →
+                          </p>
+                        </Card>
+                      </div>
+
+                      {/* 뒷면 */}
+                      <div
+                        className="w-full h-full absolute inset-0"
+                        style={{ 
+                          backfaceVisibility: "hidden",
+                          WebkitBackfaceVisibility: "hidden",
+                          transform: "rotateY(180deg)"
+                        }}
+                      >
+                        <Card className="p-6 bg-primary/5 border-primary/30 h-full flex flex-col overflow-y-auto">
+                          <div className="mb-4">
+                            <h4 className="text-base text-primary font-bold mb-1">프로젝트 상세</h4>
+                            <p className="text-xs text-muted-foreground">{project.period}</p>
+                          </div>
+                          
+                          <div className="space-y-2 mb-4 flex-grow">
+                            {project.detailedDescription?.map((detail, i) => (
+                              <div key={i} className="flex items-start gap-2">
+                                <span className="text-primary text-xs mt-1">•</span>
+                                <p className="text-xs text-foreground leading-relaxed">{detail}</p>
+                              </div>
+                            ))}
+                          </div>
+
+                          <p className="text-xs text-primary mt-auto text-center font-semibold">
+                            클릭하여 돌아가기 ←
+                          </p>
+                        </Card>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.section>
 
