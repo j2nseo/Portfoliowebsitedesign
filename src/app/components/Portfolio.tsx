@@ -379,7 +379,7 @@ export function Portfolio() {
                   title: ['AI-Based Hourly Accident Prediction in NYC Using Weather Data'],
                   organization: 'Qualcomm Institute, UC San Diego',
                   period: '2024.07 - 2024.08',
-                  description: 'NYC 교통사고 + 기상 데이터를 결합한 7단계 정기 시계열 데이터셋 구축. XGBoost vs Random Forest 성능 비교 분석, 최적 예측 모델 도출.',
+                  description: 'NYC 교통사고 + 기상 데이터를 결합한 시계열 데이터셋 구축. <br> XGBoost vs Random Forest 성능 비교 분석, 최적 예측 모델 도출.',
                   detailedDescription: [
                     '배경: 뉴욕시 교통사고 예측을 위한 기상 데이터 활용 연구',
                     '데이터: NYC Motor Vehicle Collisions 데이터 + 기상청 날씨 데이터 (2018-2024)',
