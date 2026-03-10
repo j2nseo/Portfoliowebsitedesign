@@ -330,8 +330,8 @@ export function Portfolio() {
               </p>
               
               <p>
-                이후 <span className="font-semibold">경기대학교 산업시스템공학과 데이터 분석 연구실</span>에 학부 연구원으로 합류해 현재도 데이터로 사회 문제를 해결하는 연구를<br />
-                이어가고 있습니다.
+                이후 <span className="font-semibold">경기대학교 산업시스템공학과 데이터 분석 연구실</span>에 학부 연구원으로 합류해 현재도 데이터로 사회 문제를 해결하는<br />
+                연구를 이어가고 있습니다.
               </p>
             </div>
 
