@@ -256,7 +256,7 @@ export function Portfolio() {
 
       {/* Left Side - Fixed */}
       <div className="w-[40%] lg:w-[33.333%] h-screen flex flex-col justify-start pt-24 p-8 lg:p-12 fixed left-0 top-0">
-        <div className="flex flex-col h-full max-w-md ml-auto w-full">
+        <div className="flex flex-col h-full max-w-md w-full" style={{ marginLeft: '15%' }}>
           <div className="space-y-4">
             <h1 className="text-3xl lg:text-4xl text-foreground">
               {displayedText}
@@ -326,7 +326,8 @@ export function Portfolio() {
               </p>
               
               <p>
-                <span className="font-semibold">QI AI 개발 프로그램에 참여하여 Qualcomm Institute, UC San Diego</span>에서 AI 기반 교통사고 예측 연구를 진행하며 실제 공공 데이터를 분석하고 머신러닝 모델을 적용하는 연구 경험을 쌓았습니다.
+                <span className="font-semibold">QI AI 개발 프로그램에 참여하여 Qualcomm Institute, UC San Diego</span>에서 AI 기반 교통사고 예측 연구를 진행하며<br />
+                실제 공공 데이터를 분석하고 머신러닝 모델을 적용하는 연구 경험을 쌓았습니다.
               </p>
               
               <p>
