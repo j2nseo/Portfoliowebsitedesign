@@ -32,6 +32,7 @@ export function Portfolio() {
   const educationRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const courseworkRef = useRef<HTMLDivElement>(null);
   const researchRef = useRef<HTMLDivElement>(null);
   const othersRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
@@ -56,28 +57,28 @@ export function Portfolio() {
       period: '2024.07 - 2024.08',
       description: 'NYC 교통사고 + 기상 데이터를 결합한 7단계 정기 시계열 데이터셋 구축. XGBoost vs Random Forest 성능 비교 분석, 최적 예측 모델 도출.',
       detailedDescription: [
-        '배경: 뉴욕시 교통사고 예측을 위한 기상 데이터 활용 연구',
-        '데이터: NYC Motor Vehicle Collisions 데이터 + 기상청 날씨 데이터 (2018-2024)',
-        '방법론: 7단계 정기 시계열 데이터 전처리 파이프라인 구축',
-        '모델: XGBoost, Random Forest 앙상블 모델 학습 및 하이퍼파라미터 최적화',
-        '결과: XGBoost 모델 R²=0.782로 최우수 성능 달성',
-        '성과: 시간대별 사고 예측 정확도를 통한 교통 안전 정책 수립 기여'
+        '배경 및 문제 정의:\n- 뉴욕시는 세계 최고 수준의 교통량으로 인해 매년 20만 건 이상의 교통사고 발생\n- 기존 연구는 사고 위치나 시간 정보만 활용\n- 주요 사고 유발 요인인 날씨 데이터를 결합한 시간별(Hourly) 예측 연구 부족',
+        '데이터:\n- NYC Open Data의 NYC Motor Vehicle Collisions (2012.07~2019.12)\n- Visual Crossing의 Total Weather Data (시간 단위 기상 데이터 23개 특성)\n- 두 데이터셋 결합하여 Constructed Feature Dataset(CFD) 생성\n- 12개 독립변수, 1개 종속변수(시간별 교통사고 건수)',
+        '방법론 - 7단계 정기 시계열 데이터 전처리 파이프라인:\n- 시간별 사고 건수 집계 (Crash Date + Hour → Hourly Car Accidents)\n- COVID 영향 기간(2020년~) 데이터 제거\n- 관련성 낮은 변수 제거 (FeelsLike, CloudCover, SolarRadiation 등)\n- 주중/주말 구분 변수(Weekday) 추가\n- Icon 특성 전처리 (밤/낮, 구름 상태 → Clear 통합)\n- CFD 생성 및 Min-Max 정규화 적용 → CFDN 생성\n- 2012~2018년 학습 / 2019년 테스트 분할',
+        '모델:\n- Random Forest Regression(RFR) vs. XGBoost 비교\n- 하이퍼파라미터 최적화 수행',
+        '결과:\n- CFD 기반 XGBoost 모델이 최우수 성능 달성 (R²=0.782, RMSE=6.586)\n- RMSE 6.586은 실제 시간별 사고 최댓값(75건)의 약 9% 수준\n- 표준편차(14.11)보다 낮은 오차율 달성',
+        '의의:\n- 시간대별 사고 예측 정확도 향상\n- 교통 안전 정책 수립 지원\n- 비반복적 교통 혼잡 완화에 기여'
       ],
       tags: ['Python', 'XGBoost', 'RandomForest', 'Preprocessing', 'KNIME'],
     },
     {
       category: '🏆 우수상',
-      title: ['중장년 맞춤형 AI 교육 추천 에이전트 "다시, 봄"'],
+      title: ['중장년 맞춤형 AI 교육 추천 에이전트 \"다시, 봄\"'],
       organization: '연세대학교 미래 ICT 서울 지역사회 경험학습 공모전',
       period: '2025.11 - 2025.12',
       description: 'Ko-SRoBERTa + FAISS 벡터 DB + LangChain RAG 구조로 직군 경력 기반 AI 교육 추천. LLM 적합성 검증 단계 추가로 추천 신뢰도 강화.',
       detailedDescription: [
-        '배경: 중장년층을 위한 AI 기반 재교육 프로그램 추천 시스템 개발',
-        '문제 정의: 디지털 전환기 중장년층의 재취업을 위한 맞춤형 교육 필요',
-        '기술 스택: Ko-SRoBERTa 임베딩 + FAISS 벡터 DB + LangChain RAG',
-        '핵심 기능: 사용자 직군/경력 기반 유사도 검색 → LLM 적합성 검증 → 맞춤 추천',
-        '차별점: 이중 검증(벡터 유사도 + LLM) 방식으로 추천 신뢰도 향상',
-        '성과: 연세대학교 미래 ICT 공모전 우수상 수상'
+        '배경 및 문제 정의:\n- 초고령화 시대, 중장년층이 최대 경제활동 인구 집단으로 부상\n- AI 활용 역량 부재로 인한 생산성 격차 → 고용 위기\n- AI 교육 콘텐츠는 다수 존재하나 분산·파편화\n- 직무 경험과 수준에 맞는 맞춤형 교육 추천 서비스 부재',
+        '시스템 구조 - 5단계 파이프라인:\n- 데이터 수집: 고용24, 서울50플러스, STEP 등 공공·민간 교육 플랫폼에서 강의 데이터 수집\n- 임베딩: 한국어 문맥 이해 특화 모델 Ko-SRoBERTa 기반 임베딩\n- 벡터 DB 구축: FAISS 기반 벡터 DB 구축\n- RAG 챗봇: LangChain 기반, 단계형 대화로 사용자 정보 수집 후 LLM이 프로필 생성 및 검색 쿼리 변환\n- 적합성 검증: LLM 기반 적합성 검증 모듈로 직무 연관성·난이도 기준 강의 추천',
+        '기술적 차별점:\n- 이중 검증 시스템: 벡터 유사도 검색 + LLM 기반 적합성 검증\n- 추천 신뢰도 향상\n- 할루시네이션 최소화를 위한 프롬프트 엔지니어링 적용',
+        '배포:\n- Flask 웹 애플리케이션으로 전체 파이프라인 배포\n- 강의명 클릭 시 신청 페이지 자동 연결',
+        '기대 효과:\n- 개인: 직무 경험 반영 AI 교육 추천으로 재취업 경쟁력 강화\n- 기업: AI 역량 갖춘 중장년 인력 효과적 매칭\n- 사회: 교육-일자리 연계를 통한 고용 선순환 기반 마련',
+        '성과:\n- 연세대학교 미래 ICT 서울 지역사회 경험학습 공모전 우수상 수상'
       ],
       tags: ['Python', 'LangChain', 'RAG', 'FAISS', 'OpenAI API'],
     },
@@ -88,12 +89,11 @@ export function Portfolio() {
       period: '2025.09 - 2025.12',
       description: '웹 소설과 애니메이션 매체 간 전환 시 사용자 흥미 포인트를 분석하여 OSMU 전략 수립.',
       detailedDescription: [
-        '배경: 웹 소설의 애니메이션 매체 전환(OSMU) 전략 수립을 위한 데이터 분석',
-        '목표: 웹 소설 → 애니메이션 전환 시 사용자 흥미 요소 규명',
-        '분석 대상: 네이버 웹소설/웹툰 리뷰 데이터, 애니메이션 시청 평가 데이터',
-        '분석 방법: 텍스트 마이닝, 감성 분석, 토픽 모델링을 통한 핵심 흥미 요소 추출',
-        '결과: 매체 전환 시 핵심 유지 요소(캐릭터 일관성, 스토리 구조) vs 변화 요소(시각 연출) 도출',
-        '활용: 데이터 기반 OSMU 콘텐츠 기획 및 제작 전략 수립'
+        '배경 및 문제 정의:\n- 웹소설 IP 기반 애니메이션화 증가 추세\n- 장르별 성공 요인 판단이 제작진의 경험·감각에 의존\n- STELLA&: 웹소설을 숏폼·미드폼·롱폼으로 영상화하는 B2B 기업\n- 시청자가 어떤 포인트에서 흥미를 느끼는지 정량적 근거 필요',
+        '분석 1 - 판타지 장르 주요 시청 경험 요인 분석:\n- 대상: 이세계 전생물 애니메이션 3개 작품, LAFTEL 리뷰 총 4,200건\n- 파이프라인: 텍스트 전처리 → BERTopic 토픽 모델링 → BERT 하이브리드 감성 분석 → 네트워크 분석\n- 6개 주요 토픽 도출:\n  · 캐릭터 팬덤 및 애정\n  · 조연 서사 및 인물관계도\n  · 전투 쾌감 및 긴장감\n  · 제작 품질 및 만족도 저하\n  · 장르적 호불호 및 스토리라인\n  · 정서적 몰입 및 서사적 감동',
+        '분석 2 - 회차별 시청자 리뷰 감성 분석:\n- 대상: LAFTEL <나 혼자만 레벨업> 자막판 리뷰 총 706건\n- 방법: KoELECTRA 기반 딥러닝 감성 분석 수행\n- 회차별 감성 점수(0~1) 시계열 그래프화\n- 최고점: 12화 (0.78) - 압도적 액션 퀄리티\n- 최저점: 7화 (0.43) - 총집편 편성으로 인한 배신감',
+        '비즈니스 인사이트 제공:\n- 총집편 편성 불만 → 흐름 단절 리스크\n- 전개 템포 아쉬움 → 시청 지속 시간 감소\n- 원작과의 괴리 → 원작 팬덤 반발\n- 구체적 현상과 시청자 반응, 비즈니스 리스크 매핑',
+        '활용:\n- 데이터 기반 OSMU 콘텐츠 기획 및 제작 전략 수립\n- 장르별 핵심 만족 요인 및 회피 요인 파악\n- 제작 단계별 리스크 사전 예측'
       ],
       tags: ['Python', 'Data Analysis', 'OSMU', 'Text Mining', 'Topic Modeling'],
     },
@@ -104,12 +104,12 @@ export function Portfolio() {
       period: '2024.04 - 2024.11',
       description: 'GPT few-shot learning + 프롬프트 엔지니어링으로 학습자 역량에 최적화된 맞춤형 계획 생성 AI 봇 구축.',
       detailedDescription: [
-        '배경: 학습자 개인별 역량과 목표에 맞춘 학습 계획 자동 생성 앱 개발',
-        '핵심 기능: GPT-4 API + Few-shot Learning으로 학습자 맥락 기반 계획 생성',
-        '프롬프트 엔지니어링: 학습 목표, 가용 시간, 난이도 선호 반영 프롬프트 최화',
-        'To-Do List 연동: Flutter 기반 모바일 앱과 GPT 봇 실시간 동기화',
-        '사용자 피드백: 계획 준수율 추적 → 재학습으로 추천 정확도 향상',
-        '발표: 2024 경기 SW 페스타 프로젝트 전시'
+        '배경 및 문제 정의:\n- 기존 일정 관리 앱은 단순 알림·캘린더 기능에 그침\n- 학습자의 개별 학습 패턴이나 목표를 반영한 맞춤형 지원 부재\n- 학생들이 학습 목표·달성 현황을 스스로 추적하는 데 많은 시간 소비',
+        '핵심 기능:\n- GPT Chatbot: 시험 일정·범위 입력 시 맞춤형 학습 계획 자동 생성\n- 개인화 목표 설정: Few-shot Prompt로 개별 학습 패턴 반영\n- 캘린더 + To-Do List: 월별 일정 확인 및 학습 수행 진도 추적\n- 알림 & 리마인더: 학습 목표 달성 지원',
+        '시스템 구조:\n- Client(프론트엔드) → GitHub → AWS EC2 → Node.js → MongoDB / Amazon RDS\n- GPT 모델 파인튜닝으로 학생 학습 대화 데이터 기반 효과적 학습 관리 지원',
+        '기존 앱과의 차별점:\n- 단순 알림이 아닌 GPT 기반 맞춤형 학습 계획 제안\n- 학습 패턴 반영한 목표 설정\n- To-Do List + 달성 진도 자동 추적',
+        '기대 효과:\n- 개인 요구에 맞는 일정·방법 제공으로 학습 효율성 향상\n- 직관적 UI/UX로 학습 계획 손쉽게 관리\n- 향후 온라인 강의 플랫폼 연계·공부 타이머 앱 연동 등 확장 가능',
+        '발표:\n- 2024 경기 SW 페스타 프로젝트 전시'
       ],
       tags: ['Python', 'OpenAI API', 'Few-shot', 'Prompt Eng.'],
     },
@@ -120,12 +120,11 @@ export function Portfolio() {
       period: '2023.04 - 2023.11',
       description: '디지털 실버계층 대상 키오스크 접근성 향상 서비스. 코사인 유사도 + KNN 기반 콘텐츠 AI 추천, AR Core 기반 공간 안내 구현.',
       detailedDescription: [
-        '배경: 디지털 소외계층을 위한 키오스크 사용 교육 플랫폼 개발',
-        '문제 정의: 고령층의 키오스크 이용 어려움 → 메타버스 가상 훈련 환경 제공',
-        'AI 추천 시스템: 코사인 유사도 + KNN 기반 사용자 맞춤 콘텐츠 추천',
-        'AR 공간 안내: AR Core를 활용한 실제 매장 내 키오스크 위치 안내',
-        '메타버스 환경: Unity 기반 가상 키오스크 체험 공간 구축',
-        '성과: 2023 한이음 ICT 멘토링 공모전 발표'
+        '배경 및 문제 정의:\n- 디지털 소외계층을 위한 키오스크 사용 교육 플랫폼 개발 필요\n- 고령층의 키오스크 이용 어려움 문제 해결',
+        '핵심 기능:\n- 메타버스 가상 훈련 환경 제공\n- Unity 기반 가상 키오스크 체험 공간 구축',
+        'AI 추천 시스템:\n- 코사인 유사도 + KNN 기반 사용자 맞춤 콘텐츠 추천\n- 개인화된 학습 경로 제공',
+        'AR 공간 안내:\n- AR Core를 활용한 실제 매장 내 키오스크 위치 안내\n- 실시간 길찾기 지원',
+        '성과:\n- 2023 한이음 ICT 멘토링 공모전 발표'
       ],
       tags: ['Python', 'ML', 'KNN', 'AR Core', 'Cosine Sim.'],
     },
@@ -194,6 +193,7 @@ export function Portfolio() {
     { name: 'EDUCATION', ref: educationRef },
     { name: 'EXPERIENCE', ref: experienceRef },
     { name: 'PROJECTS', ref: projectsRef },
+    { name: 'COURSEWORK', ref: courseworkRef },
     { name: 'RESEARCH', ref: researchRef },
     { name: 'OTHERS', ref: othersRef },
     { name: 'SKILLS', ref: skillsRef },
@@ -222,7 +222,7 @@ export function Portfolio() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    const sections = [aboutRef, educationRef, experienceRef, projectsRef, researchRef, othersRef, skillsRef, contactRef];
+    const sections = [aboutRef, educationRef, experienceRef, projectsRef, courseworkRef, researchRef, othersRef, skillsRef, contactRef];
     sections.forEach((ref) => {
       if (ref.current) {
         observer.observe(ref.current);
@@ -326,13 +326,11 @@ export function Portfolio() {
               </p>
               
               <p>
-                <span className="font-semibold">QI AI 개발 프로그램에 참여하여 Qualcomm Institute, UC San Diego</span>에서 AI 기반 교통사고 예측 연구를 진행하며<br />
-                실제 공공 데이터를 분석하고 머신러닝 모델을 적용하는 연구 경험을 쌓았습니다.
+                <span className="font-semibold">QI AI 개발 프로그램에 참여하여 Qualcomm Institute, UC San Diego</span>에서 AI 기반 교통사고 예측 연구를 진행하며 실제 공공 데이터를 분석하고 머신러닝 모델을 적용하는 연구 경험을 쌓았습니다.
               </p>
               
               <p>
-                이후 <span className="font-semibold">경기대학교 산업시스템공학과 데이터 분석 연구실</span>에 학부 연구원으로 합류해 현재도 데이터로 사회 문제를 해결하는<br />
-                연구를 이어가고 있습니다.
+                이후 <span className="font-semibold">경기대학교 산업시스템공학과 데이터 분석 연구실</span>에 학부 연구원으로 합류해 현재도 데이터로 사회 문제를 해결하는 연구를 이어가고 있습니다.
               </p>
             </div>
 
@@ -383,7 +381,7 @@ export function Portfolio() {
                 </div>
                 <h4 className="text-lg text-foreground font-bold mb-2">화홍고등학교</h4>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  인문계
+                  문계
                 </p>
               </div>
             </div>
@@ -535,7 +533,7 @@ export function Portfolio() {
                 onClick={() => setSelectedProject(null)}
               >
                 <motion.div
-                  className="bg-background rounded-lg max-w-5xl w-full max-h-[92vh] overflow-y-auto p-12 relative"
+                  className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 relative"
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
@@ -543,15 +541,15 @@ export function Portfolio() {
                 >
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="absolute top-6 right-6 text-muted-foreground hover:text-foreground transition-colors"
+                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    <X size={28} />
+                    <X size={24} />
                   </button>
 
-                  <div className="mb-10">
+                  <div className="mb-6">
                     <Badge 
                       variant="outline" 
-                      className={`text-sm font-semibold mb-6 ${
+                      className={`text-xs font-semibold mb-3 ${
                         projectsData[selectedProject].category.includes('🏆') 
                           ? 'border-yellow-500 text-yellow-600 bg-yellow-50' 
                           : 'border-primary/30 text-primary bg-primary/5'
@@ -560,7 +558,7 @@ export function Portfolio() {
                       {projectsData[selectedProject].category}
                     </Badge>
                     
-                    <h3 className="text-4xl text-foreground font-bold mb-5 leading-tight">
+                    <h3 className="text-2xl text-foreground font-bold mb-3 leading-snug">
                       {Array.isArray(projectsData[selectedProject].title) ? (
                         <>
                           {projectsData[selectedProject].title.map((line, i) => (
@@ -575,7 +573,7 @@ export function Portfolio() {
                       )}
                     </h3>
                     
-                    <p className="text-lg text-muted-foreground mb-6">
+                    <p className="text-sm text-muted-foreground mb-4">
                       {projectsData[selectedProject].organization} · {projectsData[selectedProject].period}
                     </p>
 
@@ -583,7 +581,7 @@ export function Portfolio() {
                       {projectsData[selectedProject].tags.map((tag, tagIndex) => (
                         <Badge 
                           key={tagIndex} 
-                          className="bg-primary text-primary-foreground text-sm px-3 py-1.5"
+                          className="bg-primary text-primary-foreground text-xs px-2.5 py-1"
                         >
                           {tag}
                         </Badge>
@@ -591,18 +589,213 @@ export function Portfolio() {
                     </div>
                   </div>
 
-                  <div className="space-y-5">
-                    {projectsData[selectedProject].detailedDescription?.map((detail, i) => (
-                      <div key={i} className="flex items-start gap-4">
-                        <span className="text-primary text-lg mt-1 flex-shrink-0">•</span>
-                        <p className="text-lg text-foreground leading-relaxed">{detail}</p>
-                      </div>
-                    ))}
+                  <div className="border-t border-border pt-6 space-y-4">
+                    {projectsData[selectedProject].detailedDescription?.map((detail, i) => {
+                      // 제목과 내용 분리
+                      const parts = detail.split(':');
+                      const hasTitle = parts.length > 1;
+                      const title = hasTitle ? parts[0].trim() : '';
+                      const content = hasTitle ? parts.slice(1).join(':').trim() : detail;
+
+                      // 줄바꿈으로 분리하여 각 라인 처리
+                      const lines = content.split('\n').filter(line => line.trim());
+
+                      return (
+                        <div key={i} className="space-y-2">
+                          {hasTitle && (
+                            <h4 className="text-sm font-bold text-primary">{title}</h4>
+                          )}
+                          <div className="pl-3 border-l-2 border-primary/20 space-y-1">
+                            {lines.map((line, lineIndex) => {
+                              const trimmedLine = line.trim();
+                              // '-'로 시작하는 경우 불릿 포인트로 처리
+                              if (trimmedLine.startsWith('-')) {
+                                const bulletContent = trimmedLine.substring(1).trim();
+                                // '·'로 시작하는 하위 항목 처리
+                                if (bulletContent.startsWith('·')) {
+                                  return (
+                                    <p key={lineIndex} className="text-sm text-foreground leading-relaxed pl-4">
+                                      {bulletContent}
+                                    </p>
+                                  );
+                                }
+                                return (
+                                  <p key={lineIndex} className="text-sm text-foreground leading-relaxed">
+                                    • {bulletContent}
+                                  </p>
+                                );
+                              }
+                              // 일반 텍스트
+                              return (
+                                <p key={lineIndex} className="text-sm text-foreground leading-relaxed">
+                                  {trimmedLine}
+                                </p>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Coursework Section */}
+          <motion.section 
+            ref={courseworkRef}
+            data-section="COURSEWORK"
+            className="space-y-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-8 bg-primary rounded-full"></div>
+              <h3 className="text-2xl text-primary font-semibold">Coursework</h3>
+            </div>
+            
+            <div className="space-y-6">
+              <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1">
+                    <h4 className="text-base text-foreground font-bold mb-1">시뮬레이션 기반 경기대학교 후문 교통혼잡 문제 완화</h4>
+                    <div className="flex items-center gap-2">
+                      <p className="text-xs text-primary font-semibold">
+                        2025-1 | 산업경영공학종합설계
+                      </p>
+                      <a
+                        href="https://www.notion.so/cf06c346606c4014bde77f363050ccba?source=copy_link#32f69c56cd2280c295e7e88b77e6cca7"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:text-primary/80 transition-colors"
+                        title="프로젝트 보기"
+                      >
+                        <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                    Simulation
+                  </Badge>
+                </div>
+                
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  SUMO(교통 시뮬레이션 툴)를 활용해 경기대학교 후문 사거리의 교통 혼잡 문제를 정량적으로 분석했습니다.<br />
+                  <br />
+                  현장 조사와 수원교통정보센터 데이터를 기반으로 추가 도로 건설 및 가변 신호등 도입 시나리오를 설계하고,<br />
+                  두 방안 병행 적용 시 <span className="text-foreground font-semibold">평균 대기시간 79.5% 단축</span> 효과를 시뮬레이션으로 입증했습니다.
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    SUMO
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Traffic Simulation
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Data Analysis
+                  </Badge>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1">
+                    <h4 className="text-base text-foreground font-bold mb-1">일회용컵 반납기 최적 위치 선정</h4>
+                    <div className="flex items-center gap-2">
+                      <p className="text-xs text-primary font-semibold">
+                        2023-2 | 머신러닝의 이해
+                      </p>
+                      <a
+                        href="https://www.notion.so/c6649139191b4f2f9f0cade31ccbc788?source=copy_link#32f69c56cd2280c4bcc4f7f3fcf349c1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:text-primary/80 transition-colors"
+                        title="프로젝트 보기"
+                      >
+                        <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                    Machine Learning
+                  </Badge>
+                </div>
+                
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  수원시 내 일회용컵 반납기의 최적 설치 위치를 데이터 기반으로 도출했습니다.<br />
+                  <br />
+                  수원시 버스정류장·지하철·카페 위치 데이터와 유동인구 데이터를 결합하여 전처리하고,<br />
+                  <span className="text-foreground font-semibold">K-means 클러스터링</span> 알고리즘을 적용했습니다.<br />
+                  <br />
+                  Elbow Method로 최적 군집 수를 결정하고, 구글 맵으로 검증해<br />
+                  유동인구가 많고 카페가 밀집한 지점을 최종 설치 위치로 제안했습니다.
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    K-means
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Clustering
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Python
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Data Analysis
+                  </Badge>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-card hover:bg-card/80 transition-all">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h4 className="text-base text-foreground font-bold mb-1">풀무원 주문-납품 통합 데이터베이스 시스템 설계</h4>
+                    <p className="text-xs text-primary font-semibold mb-1">
+                      2024-1 | 데이터베이스 관리
+                    </p>
+                  </div>
+                  <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-xs">
+                    Database
+                  </Badge>
+                </div>
+                
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  풀무원을 고객사로 선정해 주문-납품 통합 <span className="text-foreground font-semibold">ODS(Ordering Delivery System)</span>를 설계했습니다.<br />
+                  <br />
+                  풀무원 영업본부 실무 담당자와 2차례 킥오프 미팅을 진행해 요구사항을 분석하고,<br />
+                  자체공장(ODM)과 외부제조업체(OEM)를 자동으로 구분하는 주문 분리 기능과<br />
+                  표기오류 제품을 자동 폐기 처리하는 납품 분류 기능을 설계했습니다.<br />
+                  <br />
+                  ERD 개념적 설계부터 Toad 기반 물리적 설계, MySQL DDL/DML 작성 및<br />
+                  응용 프로세스 프로토타입 구현까지 DB 설계 전 과정을 수행했습니다.
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    MySQL
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    ERD
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    DDL/DML
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    ODS
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                    Database Design
+                  </Badge>
+                </div>
+              </Card>
+            </div>
+          </motion.section>
 
           {/* Research Section */}
           <motion.section 
@@ -758,7 +951,7 @@ export function Portfolio() {
                     <p className="text-xs text-muted-foreground tracking-wider">TOTAL VIEWS</p>
                   </div>
                   <div>
-                    <p className="text-xl text-primary font-bold">54</p>
+                    <p className="text-xl text-primary font-bold">80</p>
                     <p className="text-xs text-muted-foreground tracking-wider">POSTS</p>
                   </div>
                   <div>
