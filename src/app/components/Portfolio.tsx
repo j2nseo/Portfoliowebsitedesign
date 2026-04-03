@@ -383,7 +383,7 @@ export function Portfolio() {
                 </div>
                 <h4 className="text-lg text-foreground font-bold mb-2">화홍고등학교</h4>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  문계
+                  인문계
                 </p>
               </div>
             </div>
